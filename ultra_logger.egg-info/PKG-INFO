@@ -1,0 +1,146 @@
+Metadata-Version: 2.1
+Name: ultra_logger
+Version: 0.1.1
+Summary: This Python package provides a robust and customizable logger that simplifies the process of recording messages and events in your applications. It leverages the power of the `colorlog` library to enhance readability and debugging capabilities.
+Author: Om Sing Chandel
+Author-email: omchandel1703@gmail.com
+Description-Content-Type: text/markdown
+Requires-Dist: certifi==2024.2.2
+Requires-Dist: charset-normalizer==3.3.2
+Requires-Dist: colorama==0.4.6
+Requires-Dist: colorlog==6.8.2
+Requires-Dist: docutils==0.21.1
+Requires-Dist: idna==3.7
+Requires-Dist: importlib_metadata==7.1.0
+Requires-Dist: jaraco.classes==3.4.0
+Requires-Dist: jaraco.context==5.3.0
+Requires-Dist: jaraco.functools==4.0.0
+Requires-Dist: keyring==25.1.0
+Requires-Dist: markdown-it-py==3.0.0
+Requires-Dist: mdurl==0.1.2
+Requires-Dist: more-itertools==10.2.0
+Requires-Dist: nh3==0.2.17
+Requires-Dist: pkginfo==1.10.0
+Requires-Dist: Pygments==2.17.2
+Requires-Dist: pywin32-ctypes==0.2.2
+Requires-Dist: readme_renderer==43.0
+Requires-Dist: requests==2.31.0
+Requires-Dist: requests-toolbelt==1.0.0
+Requires-Dist: rfc3986==2.0.0
+Requires-Dist: rich==13.7.1
+Requires-Dist: setuptools==69.2.0
+Requires-Dist: tqdm==4.66.2
+Requires-Dist: twine==5.0.0
+Requires-Dist: urllib3==2.2.1
+Requires-Dist: wheel==0.43.0
+Requires-Dist: zipp==3.18.1
+
+**Custom Logger: Enhanced Logging for Your Python Applications**
+
+**Introduction**
+
+This Python package provides a robust and customizable logger that simplifies the process of recording messages and events in your applications. It leverages the power of the `colorlog` library to enhance readability and debugging capabilities.
+
+**Key Features**
+
+* **Flexible Log Levels:** Supports standard logging levels (`DEBUG`, `INFO`, `WARNING`, `ERROR`, and `CRITICAL`) to categorize messages based on severity.
+* **Colorized Output:** Leverages `colorlog` to display log messages in distinct colors, improving visual clarity.
+* **File and Console Logging:** Logs messages to a specified file and optionally to the console for immediate feedback.
+* **Customizable Formatting:** Control the appearance of log messages using formatters for both file and console output.
+* **Dynamic Console Logging:** Enable or disable console logging at runtime to manage verbosity during development.
+* **Handler Management:** Add, remove, or adjust logging handlers to tailor logging behavior.
+* **Default Loggers:** Provides convenient wrappers for standard logging methods (`debug`, `info`, `warning`, `error`, `critical`, and `exception`).
+* **Session Logging:** Decorator function `log_session` to enclose a block of code with logging messages for session tracking.
+* **Log File Reading:** Utility function `read_log_file` to conveniently read and display the contents of the log file.
+* **Log File Clearing:** Optional `clear_log_file` method to clear existing log data.
+
+**Installation**
+
+To install the `custom_logger` package from PyPI (the Python Package Index), use the following command in your terminal:
+
+```bash
+pip install custom_logger
+```
+
+**Usage**
+
+1. **Import the Logger Class:**
+
+   ```python
+   from custom_logger import Logger
+   ```
+
+2. **Create a Logger Instance:**
+
+   ```python
+   logger = Logger(log_name='my_logger', log_file='app.log', log_to_console=True)
+   ```
+
+   - `log_name`: A descriptive name for your logger (e.g., 'my_logger').
+   - `log_file`: The path to the log file where messages will be saved.
+   - `log_to_console` (optional, defaults to `True`): Whether to log messages to the console.
+
+3. **Log Messages:**
+
+   ```python
+   logger.log_message('info', 'This is an informative message.')
+   logger.warning('This is a warning message.')
+   logger.error('This is an error message.')
+   logger.critical('This is a critical message.')
+   ```
+
+4. **Default Loggers:**
+
+   ```python
+   logger.info('This is a general message.')
+   logger.warning('This requires attention.')
+   logger.exception('An exception occurred!', exc_info=True)  # Optional exception info
+   ```
+
+5. **Session Logging:**
+
+   ```python
+   @logger.log_session
+   def my_function():
+       # Your code here
+       logger.info('Processing completed.')
+   ```
+
+   The `log_session` decorator automatically logs the start and end of the function execution.
+
+6. **Read Log File:**
+
+   ```python
+   logger.read_log_file()
+   ```
+
+7. **Clear Log File (optional):**
+
+   ```python
+   logger.clear_log_file()  # Use with caution
+   ```
+
+**Advanced Usage**
+
+* **Dynamic Console Logging:**
+
+  ```python
+  logger.disable_console_logging()  # Disable console logging
+  logger.enable_console_logging()   # Re-enable console logging
+  ```
+
+* **Handler Management:**
+
+   Refer to the source code for details on adding, removing, or modifying logging handlers.
+
+**Customization**
+
+For advanced customization, consult the source code to modify formatting options for file and console output or create custom handlers.
+
+**Contributing**
+
+We welcome contributions to improve this logger. Feel free to submit pull requests on GitHub!
+
+**License**
+
+This project is licensed under the MIT License. See the LICENSE file for details.
