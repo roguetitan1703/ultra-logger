@@ -19,10 +19,12 @@ This Python package provides a robust and customizable logger that simplifies th
 
 **Installation**
 
-To install the `custom_logger` package from PyPI (the Python Package Index), use the following command in your terminal:
+From [pypi.org](https://pypi.org/project/ultra-logger/)
+
+To install the `ultra_logger` package from PyPI (the Python Package Index), use the following command in your terminal:
 
 ```bash
-pip install custom_logger
+pip install ultra_logger
 ```
 
 **Usage**
@@ -30,7 +32,7 @@ pip install custom_logger
 1. **Import the Logger Class:**
 
    ```python
-   from custom_logger import Logger
+   from ultra_logger import Logger
    ```
 
 2. **Create a Logger Instance:**

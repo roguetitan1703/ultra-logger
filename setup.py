@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
     
 setup(
     name='ultra_logger',
-    version='0.1.1',
+    version='0.1.2',
     packages=find_packages(),
     author="Om Sing Chandel",
     author_email="omchandel1703@gmail.com",
