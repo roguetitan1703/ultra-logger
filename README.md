@@ -1,111 +1,152 @@
-**Custom Logger: Enhanced Logging for Your Python Applications**
+# **ultra-logger**
 
-**Introduction**
+**ultra-logger** is a customizable, visually enhanced Python logging library designed to simplify logging for developers. It integrates `colorlog` for colorful, readable logs and provides features such as console/file logging, log session tracking, and log file management.
 
-This Python package provides a robust and customizable logger that simplifies the process of recording messages and events in your applications. It leverages the power of the `colorlog` library to enhance readability and debugging capabilities.
+---
 
-**Key Features**
+## **Features**
 
-* **Flexible Log Levels:** Supports standard logging levels (`DEBUG`, `INFO`, `WARNING`, `ERROR`, and `CRITICAL`) to categorize messages based on severity.
-* **Colorized Output:** Leverages `colorlog` to display log messages in distinct colors, improving visual clarity.
-* **File and Console Logging:** Logs messages to a specified file and optionally to the console for immediate feedback.
-* **Customizable Formatting:** Control the appearance of log messages using formatters for both file and console output.
-* **Dynamic Console Logging:** Enable or disable console logging at runtime to manage verbosity during development.
-* **Handler Management:** Add, remove, or adjust logging handlers to tailor logging behavior.
-* **Default Loggers:** Provides convenient wrappers for standard logging methods (`debug`, `info`, `warning`, `error`, `critical`, and `exception`).
-* **Session Logging:** Decorator function `log_session` to enclose a block of code with logging messages for session tracking.
-* **Log File Reading:** Utility function `read_log_file` to conveniently read and display the contents of the log file.
-* **Log File Clearing:** Optional `clear_log_file` method to clear existing log data.
+- **Color-coded Console Logs**: Easy to read with distinct colors for each log level.
+- **File Logging**: Saves logs to a file for later analysis.
+- **Console Logging Control**: Toggle console logging on or off dynamically.
+- **Session Tracking**: Log the start and end of a specific session or function.
+- **Custom Log Levels**: Supports all standard log levels (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`).
+- **Log File Management**: Read and clear log files effortlessly.
 
-**Installation**
+---
 
-From [pypi.org](https://pypi.org/project/ultra-logger/)
+## **Installation**
 
-To install the `ultra_logger` package from PyPI (the Python Package Index), use the following command in your terminal:
+Install `ultra-logger` directly from PyPI:
 
 ```bash
-pip install ultra_logger
+pip install ultra-logger
 ```
 
-**Usage**
+---
 
-1. **Import the Logger Class:**
+## **Usage**
 
-   ```python
-   from ultra_logger import Logger
-   ```
+Here's how to use **ultra-logger** in your Python projects:
 
-2. **Create a Logger Instance:**
+### **Basic Setup**
 
-   ```python
-   logger = Logger(log_name='my_logger', log_file='app.log', log_to_console=True)
-   ```
+```python
+from ultra_logger import Logger
 
-   - `log_name`: A descriptive name for your logger (e.g., 'my_logger').
-   - `log_file`: The path to the log file where messages will be saved.
-   - `log_to_console` (optional, defaults to `True`): Whether to log messages to the console.
+# Create a Logger instance
+logger = Logger(
+    log_name="my_app",
+    log_file="app.log",
+    log_to_console=True,   # Enable console logging
+    clear_previous=False,  # Don't clear the log file at initialization
+)
 
-3. **Log Messages:**
+# Log messages
+logger.info("This is an informational message.")
+logger.warning("This is a warning.")
+logger.error("This is an error message.")
+logger.critical("Critical issue encountered!")
+```
 
-   ```python
-   logger.log_message('info', 'This is an informative message.')
-   logger.warning('This is a warning message.')
-   logger.error('This is an error message.')
-   logger.critical('This is a critical message.')
-   ```
+### **Advanced Features**
 
-4. **Default Loggers:**
+#### **Log Sessions**
 
-   ```python
-   logger.info('This is a general message.')
-   logger.warning('This requires attention.')
-   logger.exception('An exception occurred!', exc_info=True)  # Optional exception info
-   ```
+Easily track the start and end of a session using the `@log_session` decorator:
 
-5. **Session Logging:**
+```python
+@logger.log_session
+def perform_task():
+    logger.info("Task in progress...")
+    # Your logic here
+    logger.info("Task completed!")
 
-   ```python
-   @logger.log_session
-   def my_function():
-       # Your code here
-       logger.info('Processing completed.')
-   ```
+perform_task()
+```
 
-   The `log_session` decorator automatically logs the start and end of the function execution.
+#### **Enable/Disable Console Logging**
 
-6. **Read Log File:**
+Control logging dynamically:
 
-   ```python
-   logger.read_log_file()
-   ```
+```python
+logger.disable_console_logging()  # Suppress console logs
+logger.info("This won't appear in the console.")
 
-7. **Clear Log File (optional):**
+logger.enable_console_logging()  # Re-enable console logging
+logger.info("This will appear in the console.")
+```
 
-   ```python
-   logger.clear_log_file()  # Use with caution
-   ```
+#### **Read or Clear Log Files**
 
-**Advanced Usage**
+```python
+# Read all log entries from the log file
+logger.read_log_file()
 
-* **Dynamic Console Logging:**
+# Clear the log file
+logger.clear_log_file()
+logger.info("The log file is now cleared.")
+```
 
-  ```python
-  logger.disable_console_logging()  # Disable console logging
-  logger.enable_console_logging()   # Re-enable console logging
-  ```
+#### **Custom Log Levels**
 
-* **Handler Management:**
+Use default logging methods for convenience:
 
-   Refer to the source code for details on adding, removing, or modifying logging handlers.
+```python
+logger.debug("Debugging details.")
+logger.error("Error encountered!")
+logger.exception("Exception occurred with traceback.", exc_info=True)
+```
 
-**Customization**
+---
 
-For advanced customization, consult the source code to modify formatting options for file and console output or create custom handlers.
+## **Log Format**
 
-**Contributing**
+**Console Logs**: Color-coded for easy readability:
 
-We welcome contributions to improve this logger. Feel free to submit pull requests on GitHub!
+```
+2024-11-25 12:34:56 - INFO    - Informational message
+2024-11-25 12:34:57 - WARNING - Warning message
+2024-11-25 12:34:58 - ERROR   - Error message
+2024-11-25 12:34:59 - CRITICAL- Critical issue
+```
 
-**License**
+**File Logs**: Saved in plain text for detailed analysis:
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+```
+2024-11-25 12:34:56 - INFO    - Informational message
+2024-11-25 12:34:57 - WARNING - Warning message
+```
+
+---
+
+## **Testing**
+
+Run the following tests using `pytest` to ensure the logger works as expected:
+
+```bash
+pytest tests/
+```
+
+---
+
+## **Contributing**
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`feature/my-feature`).
+3. Commit your changes.
+4. Push the branch and submit a pull request.
+
+---
+
+## **License**
+
+This project is licensed under the MIT License.
+
+---
+
+## **Author**
+
+Developed by **Om Singh Chandel**. Feel free to reach out for suggestions or issues at [omchandel1703@gmail.com](mailto:omchandel1703@gmail.com).
